@@ -1,0 +1,59 @@
+.container {
+  width: 100%;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.gallery-item {
+  margin: 0.5em;
+}
+
+.placeholder {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder-icon {
+  font-size: 3.5em;
+}
+
+.gallery-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-content {
+  width: 100%;
+}
+
+.filter {
+  float: left;
+  position: relative;
+  width: 20%;
+  margin-left: 20px;
+}
+
+.container.images-field {
+  position: absolute;
+  width: fit-content;
+  margin-left: 17%;
+  width: 80%;
+}
+
+.gallery {
+  width: 1200px;
+}
