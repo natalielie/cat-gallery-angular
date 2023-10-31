@@ -5,7 +5,6 @@ import { EMPTY, empty } from 'rxjs';
 import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as CatGalleryActions from '../actions/cat-gallery.actions';
 import { CatImageService } from 'src/app/services/cat-image.service';
-import { selectFilters } from '../selectors/cat-gallery.selectors';
 import { CatGalleryState } from '../reducers/cat-gallery-images.reducers';
 
 @Injectable()

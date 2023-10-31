@@ -8,6 +8,9 @@ import {
 import { Observable } from 'rxjs';
 import { apiRequest } from '../shared/api.example';
 
+/**
+ * An interceptor which provides the API key to get the access to the db
+ */
 @Injectable()
 export class CatImageInterceptor implements HttpInterceptor {
   constructor() {}
