@@ -7,12 +7,12 @@ import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap, take } from 'rxjs/operators';
 import { inject } from '@angular/core';
 import { CatImageService } from '../services/cat-image.service';
-import { Breed } from '../interfaces/cat.interface';
+import { IBreed } from '../interfaces/cat.interface';
 
-export const CatResolver: ResolveFn<Breed[]> = (
+export const CatResolver: ResolveFn<IBreed[]> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
-): Observable<Breed[]> => {
+): Observable<IBreed[]> => {
   const catImageService = inject(CatImageService);
 
   switch (state.url) {

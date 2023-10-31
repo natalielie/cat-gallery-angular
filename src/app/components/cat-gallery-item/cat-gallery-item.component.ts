@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CatImage } from 'src/app/interfaces/cat.interface';
+import { ICatImage } from 'src/app/interfaces/cat.interface';
 
 @Component({
   selector: 'app-cat-gallery-item',
@@ -8,7 +8,7 @@ import { CatImage } from 'src/app/interfaces/cat.interface';
 })
 export class CatGalleryItemComponent implements OnInit {
   @Input()
-  image!: CatImage;
+  image!: ICatImage;
 
   constructor() {}
 
