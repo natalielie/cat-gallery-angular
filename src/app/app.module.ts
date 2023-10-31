@@ -32,14 +32,6 @@ const catGalleryReducerMap: ActionReducerMap<CatGalleryState> = {
   imageData: imageReducers,
 };
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: ParentGalleryComponent,
-    resolve: { breeds: CatResolver },
-  },
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +43,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
@@ -63,7 +56,6 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
-    RouterModule.forRoot(appRoutes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

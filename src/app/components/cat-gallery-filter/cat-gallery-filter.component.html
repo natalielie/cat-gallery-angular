@@ -1,6 +1,8 @@
 <h2>Filter</h2>
 <form [formGroup]="filtersForm">
-  <mat-checkbox (change)="onHasBreed()" value="false"> Has Breed</mat-checkbox>
+  <mat-checkbox (change)="onHasBreed()" value="true" checked>
+    Has Breed</mat-checkbox
+  >
   <mat-form-field class="mat-input-container mat-form-field breed"
     ><mat-label>By Breed</mat-label>
     <mat-select
@@ -21,8 +23,6 @@
       >
     </mat-select>
   </mat-form-field>
-  <!-- <button mat-raised-button (click)="selectAllBreeds()">Select All</button>
-  <button mat-raised-button (click)="deSelectAllBreeds()">Deselect All</button>-->
 
   <mat-form-field class="mat-input-container mat-form-field quantity"
     ><mat-label>By Request Quantity</mat-label>

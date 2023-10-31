@@ -1,15 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { CatImage } from 'src/app/interfaces/cat.interface';
+import { ICatImage } from 'src/app/interfaces/cat.interface';
 import { ImageFilter } from '../reducers/cat-gallery-images.reducers';
 
-export const GetImages = createAction(
+export const getImages = createAction(
   '[Cat Gallery] Get Images',
   props<{ limit: number }>()
 );
 
-export const ImagesLoaded = createAction(
+export const imagesLoaded = createAction(
   '[Cat Gallery] Images Loaded',
-  props<{ imageResponse: CatImage[] }>()
+  props<{ imageResponse: ICatImage[] }>()
 );
 
 export const getFilter = createAction('[Cat Gallery] Get Filter State');
@@ -19,7 +19,7 @@ export const changeFilter = createAction(
   props<{ filter: ImageFilter }>()
 );
 
-export const GetFilteredImages = createAction(
+export const getFilteredImages = createAction(
   '[Cat Gallery] Get Filtered Images',
   props<{ filter: ImageFilter }>()
 );

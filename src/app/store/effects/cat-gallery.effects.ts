@@ -5,10 +5,7 @@ import { EMPTY, empty } from 'rxjs';
 import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as CatGalleryActions from '../actions/cat-gallery.actions';
 import { CatImageService } from 'src/app/services/cat-image.service';
-import {
-  //selectFilteredImagesByQuantity,
-  selectFilters,
-} from '../selectors/cat-gallery.selectors';
+import { selectFilters } from '../selectors/cat-gallery.selectors';
 import { CatGalleryState } from '../reducers/cat-gallery-images.reducers';
 
 @Injectable()
@@ -21,11 +18,11 @@ export class CatGalleryEffects {
 
   public loadImages$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CatGalleryActions.GetImages),
+      ofType(CatGalleryActions.getImages),
       mergeMap((action) =>
-        this.catImageService.getImages(action.limit.toString()).pipe(
+        this.catImageService.getAllImages(action.limit.toString()).pipe(
           map((response) =>
-            CatGalleryActions.ImagesLoaded({ imageResponse: response })
+            CatGalleryActions.imagesLoaded({ imageResponse: response })
           ),
           catchError((error) => EMPTY)
         )
@@ -35,12 +32,11 @@ export class CatGalleryEffects {
 
   public loadFilteredImages$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CatGalleryActions.GetFilteredImages),
-      withLatestFrom(this.store),
+      ofType(CatGalleryActions.getFilteredImages),
       mergeMap((action) =>
-        this.catImageService.getImages('100').pipe(
+        this.catImageService.getCatsFilteredImages(action.filter).pipe(
           map((response) =>
-            CatGalleryActions.ImagesLoaded({ imageResponse: response })
+            CatGalleryActions.imagesLoaded({ imageResponse: response })
           ),
           catchError((error) => EMPTY)
         )

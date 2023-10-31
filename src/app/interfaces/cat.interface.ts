@@ -1,13 +1,4 @@
-export interface Cat {
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-  breeds: string[];
-  favourite: object;
-}
-
-export interface CatImage {
+export interface ICatImage {
   breeds: string[];
   id: string;
   url: string;
@@ -15,7 +6,7 @@ export interface CatImage {
   height: number;
 }
 
-export interface Breed {
+export interface IBreed {
   id: string;
   name: string;
 }

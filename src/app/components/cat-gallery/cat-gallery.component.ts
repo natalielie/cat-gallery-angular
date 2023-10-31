@@ -13,23 +13,11 @@ import { CatGalleryState } from 'src/app/store/reducers/cat-gallery-images.reduc
   templateUrl: './cat-gallery.component.html',
   styleUrls: ['./cat-gallery.component.scss'],
 })
-export class CatGalleryComponent implements OnInit, OnDestroy {
+export class CatGalleryComponent {
   defualtQuantity: number = 10;
 
   imagesData$ = this.store.select(selectImageData);
-  filters$ = this.store.pipe(select(selectFilters));
+  filters$ = this.store.select(selectFilters);
 
   constructor(private store: Store<CatGalleryState>) {}
-
-  ngOnInit(): void {
-    this.loadImages();
-  }
-
-  ngOnDestroy() {}
-
-  loadImages(): void {
-    this.store.dispatch(
-      CatGalleryActions.GetImages({ limit: this.defualtQuantity })
-    );
-  }
 }
