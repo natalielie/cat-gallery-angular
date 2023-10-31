@@ -60,6 +60,9 @@ export class CatGalleryFilterComponent implements OnInit {
     this.loadFilteredImages(filter);
   }
 
+  /*
+   * Dispatching changing the filter values
+   */
   changeFilterValues(): ImageFilter {
     const filterFormValue = this.filtersForm.getRawValue();
     const filter = {
@@ -70,6 +73,12 @@ export class CatGalleryFilterComponent implements OnInit {
     return filter;
   }
 
+  /*
+   * Dispatching loading images after changing the filter values
+   *
+   * @param
+   *
+   */
   loadFilteredImages(filter: ImageFilter): void {
     this.store.dispatch(
       CatGalleryActions.getFilteredImages({
@@ -87,7 +96,9 @@ export class CatGalleryFilterComponent implements OnInit {
       return false;
     }
     if (
-      this.filtersForm.controls['breeds'].value.length === this.breedList.length
+      this.filtersForm.controls['breeds'].value.length ===
+        this.breedList.length ||
+      this.filtersForm.controls['breeds'].value.length === 0
     ) {
       this.allSelected.select();
     }

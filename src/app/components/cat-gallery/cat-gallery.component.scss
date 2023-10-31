@@ -7,10 +7,6 @@
   width: 1200px;
 }
 
-.gallery-item {
-  margin: 0.5em;
-}
-
 .placeholder {
   grid-column-start: 2;
   grid-column-end: 5;
@@ -26,15 +22,6 @@
   font-size: 3.5em;
 }
 
-.gallery-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .container.images-field {
-  position: absolute;
-  width: fit-content;
-  margin-left: 17%;
-  width: 80%;
+  margin-top: 50px;
 }

@@ -25,7 +25,6 @@ import {
   imageReducers,
 } from './store/reducers/cat-gallery-images.reducers';
 import { CatGalleryItemComponent } from './components/cat-gallery-item/cat-gallery-item.component';
-import { CatResolver } from './resolvers/cat.resolver';
 import { ParentGalleryComponent } from './components/parent-gallery.component';
 
 const catGalleryReducerMap: ActionReducerMap<CatGalleryState> = {

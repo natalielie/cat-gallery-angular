@@ -1,28 +1,30 @@
 <h2>Filter</h2>
 <form [formGroup]="filtersForm">
-  <mat-checkbox (change)="onHasBreed()" value="true" checked>
-    Has Breed</mat-checkbox
-  >
-  <mat-form-field class="mat-input-container mat-form-field breed"
-    ><mat-label>By Breed</mat-label>
-    <mat-select
-      #select
-      placeholder="Breeds"
-      formControlName="breeds"
-      (selectionChange)="onSelect()"
-      multiple
+  <div class="filter-breed">
+    <mat-checkbox (change)="onHasBreed()" value="true" checked>
+      Has Breed</mat-checkbox
     >
-      <mat-option #allSelected (click)="toggleAllSelection()" [value]="0"
-        >All</mat-option
+    <mat-form-field class="mat-input-container mat-form-field breed"
+      ><mat-label>By Breed</mat-label>
+      <mat-select
+        #select
+        placeholder="Breeds"
+        formControlName="breeds"
+        (selectionChange)="onSelect()"
+        multiple
       >
-      <mat-option
-        *ngFor="let breed of breedList"
-        [value]="breed.id"
-        (click)="tosslePerOne(allSelected.viewValue)"
-        >{{ breed.name }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
+        <mat-option #allSelected (click)="toggleAllSelection()" [value]="0"
+          >All</mat-option
+        >
+        <mat-option
+          *ngFor="let breed of breedList"
+          [value]="breed.id"
+          (click)="tosslePerOne(allSelected.viewValue)"
+          >{{ breed.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <mat-form-field class="mat-input-container mat-form-field quantity"
     ><mat-label>By Request Quantity</mat-label>
