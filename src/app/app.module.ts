@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { CatGalleryComponent } from './components/cat-gallery/cat-gallery.component';
@@ -59,6 +60,7 @@ const catGalleryReducerMap: ActionReducerMap<CatGalleryState> = {
     MatButtonModule,
     MatCheckboxModule,
     NgxSpinnerModule,
+    MatIconModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
