@@ -73,12 +73,16 @@ export class CatGalleryFilterComponent implements OnInit, OnDestroy {
     //subscribing to filter changes
     this.filtersForm.valueChanges.subscribe(() => {
       const filterFormValue = this.filtersForm.getRawValue();
+      if (filterFormValue.hasBreed && filterFormValue.breeds.length === 0) {
+        filterFormValue.breeds = ['none'];
+      }
       const filter = {
         ...filterFormValue,
         breeds: filterFormValue.breeds ?? [],
       };
-      this.loadFilteredImages(filter);
       this.store.dispatch(CatGalleryActions.changeFilter({ filter }));
+
+      this.loadFilteredImages(filter);
     });
 
     // subscriving to set of images changes
