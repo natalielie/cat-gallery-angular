@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import * as CatGalleryActions from '../../store/actions/cat-gallery.actions';
 import { selectImageData } from 'src/app/store/selectors/cat-gallery.selectors';
 import { CatGalleryState } from 'src/app/store/reducers/cat-gallery-images.reducers';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Subject } from 'rxjs';
 
 /**
  * A component for displaying loaded images
@@ -19,21 +21,36 @@ export class CatGalleryComponent implements OnInit, OnDestroy {
   /** image data from the store */
   imagesData$ = this.store.select(selectImageData);
   /** a spinner for loading */
-  showSpinner = false;
-  constructor(private store: Store<CatGalleryState>) {}
+  showImages = false;
+  /** a subject for preventing memory leak */
+  private unsubscribe: Subject<void> = new Subject<void>();
+
+  constructor(
+    private store: Store<CatGalleryState>,
+    private spinner: NgxSpinnerService
+  ) {}
 
   /**
    * The first loading of the images
    */
   ngOnInit(): void {
-    this.showSpinner = true;
     this.store.dispatch(
       CatGalleryActions.getImages({
         limit: this.defaultCount,
       })
     );
-    this.showSpinner = false;
+    !this.imagesData$.subscribe((value) => {
+      if (value.pending) {
+        this.spinner.show();
+        this.showImages = false;
+      } else {
+        this.spinner.hide();
+        this.showImages = true;
+      }
+    });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
 }

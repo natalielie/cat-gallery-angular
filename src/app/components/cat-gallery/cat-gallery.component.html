@@ -1,29 +1,42 @@
 <div class="container images-field">
   <ng-container *ngIf="imagesData$ | async as imageData">
-    <div class="gallery">
-      <ng-container *ngIf="imageData.pending">
+    <div *ngIf="showImages">
+      <div class="gallery">
+        <!-- <ng-container *ngIf="imageData.pending">
         <div class="placeholder">
           <i class="fas fa-cat placeholder-icon"></i>
-          <div class="spinner" *ngIf="showSpinner"></div>
+          <ngx-spinner bdColor="rgba(7,1,1,0.95)" size="small" type="pacman">
+            <p style="color: white">Loading Images</p>
+          </ngx-spinner>
         </div>
-      </ng-container>
+      </ng-container>-->
 
-      <ng-container *ngIf="!imageData.pending">
-        <ng-container *ngIf="imageData.images.length > 0">
-          <div *ngFor="let image of imageData.images" class="gallery-item">
-            <app-cat-gallery-item [image]="image"></app-cat-gallery-item>
-          </div>
-        </ng-container>
+        <ng-container *ngIf="!imageData.pending">
+          <ng-container *ngIf="imageData.images.length > 0">
+            <div *ngFor="let image of imageData.images" class="gallery-item">
+              <app-cat-gallery-item [image]="image"></app-cat-gallery-item>
+            </div>
+          </ng-container>
 
-        <ng-container
-          *ngIf="!imageData.pending && imageData.images.length === 0"
-        >
-          <div class="placeholder">
-            <i class="fas fa-images placeholder-icon"></i>
-            <h4>No images match filters!</h4>
-          </div>
+          <ng-container
+            *ngIf="!imageData.pending && imageData.images.length === 0"
+          >
+            <div class="placeholder">
+              <i class="fas fa-images placeholder-icon"></i>
+              <h4>No images match filters!</h4>
+            </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
+      </div>
     </div>
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="square-jelly-box"
+      [fullScreen]="true"
+    >
+      <p style="color: white">Loading Images...</p>
+    </ngx-spinner>
   </ng-container>
 </div>

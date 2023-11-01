@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { CatGalleryComponent } from './components/cat-gallery/cat-gallery.component';
@@ -57,6 +58,7 @@ const catGalleryReducerMap: ActionReducerMap<CatGalleryState> = {
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
+    NgxSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
