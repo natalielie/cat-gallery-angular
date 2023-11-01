@@ -19,6 +19,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { CatGalleryComponent } from './components/cat-gallery/cat-gallery.component';
@@ -61,6 +63,8 @@ const catGalleryReducerMap: ActionReducerMap<CatGalleryState> = {
     MatCheckboxModule,
     NgxSpinnerModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

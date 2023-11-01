@@ -31,7 +31,7 @@ const initialState: CatImageData = {
 
 export const imageReducers = createReducer(
   initialState,
-  on(CatGalleryActions.getImages, (state, { limit }) => {
+  on(CatGalleryActions.getImages, (state, { quantity }) => {
     const result = {
       ...state,
       pending: true,

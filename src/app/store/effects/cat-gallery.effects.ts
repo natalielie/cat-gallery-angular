@@ -19,7 +19,7 @@ export class CatGalleryEffects {
     this.actions$.pipe(
       ofType(CatGalleryActions.getImages),
       mergeMap((action) =>
-        this.catImageService.getAllImages(action.limit.toString()).pipe(
+        this.catImageService.getAllImages(action.quantity.toString()).pipe(
           map((response) =>
             CatGalleryActions.imagesLoaded({ imageResponse: response })
           ),

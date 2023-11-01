@@ -5,7 +5,7 @@ import { ImageFilter } from '../reducers/cat-gallery-images.reducers';
 
 export const getImages = createAction(
   '[Cat Gallery] Get Images',
-  props<{ limit: number }>()
+  props<{ quantity: number }>()
 );
 
 export const imagesLoaded = createAction(

@@ -1,22 +1,24 @@
-/*.loading {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  font-weight: bold;
-  color: yellow;
-  text-align: center;
-  z-index: 1;
-  background-color: rgba(43, 39, 39, 0.616);
-}*/
-
 .filter-breed {
   display: table-caption;
 }
 
 button {
   margin-left: 18%;
+}
+
+.gallery {
+  margin-left: 22%;
+}
+
+.filter {
+  float: left;
+  position: relative;
+  width: 20%;
+  margin-left: 20px;
+}
+
+mat-paginator {
+  margin-left: 25%;
+  margin-top: 30px;
+  position: absolute;
 }
