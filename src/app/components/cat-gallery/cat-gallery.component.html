@@ -4,7 +4,7 @@
       <ng-container *ngIf="imageData.pending">
         <div class="placeholder">
           <i class="fas fa-cat placeholder-icon"></i>
-          <h4>Loading...</h4>
+          <div class="spinner" *ngIf="showSpinner"></div>
         </div>
       </ng-container>
 

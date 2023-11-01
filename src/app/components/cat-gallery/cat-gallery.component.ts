@@ -18,18 +18,21 @@ export class CatGalleryComponent implements OnInit, OnDestroy {
   readonly defaultCount = 10;
   /** image data from the store */
   imagesData$ = this.store.select(selectImageData);
-
+  /** a spinner for loading */
+  showSpinner = false;
   constructor(private store: Store<CatGalleryState>) {}
 
   /**
    * The first loading of the images
    */
   ngOnInit(): void {
+    this.showSpinner = true;
     this.store.dispatch(
       CatGalleryActions.getImages({
         limit: this.defaultCount,
       })
     );
+    this.showSpinner = false;
   }
 
   ngOnDestroy(): void {}

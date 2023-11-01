@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CatGalleryComponent } from './components/cat-gallery/cat-gallery.component';
 import { CatResolver } from './resolvers/cat.resolver';
+
 import { ParentGalleryComponent } from './components/parent-gallery.component';
 
 const routes: Routes = [
