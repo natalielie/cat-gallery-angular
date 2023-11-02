@@ -1,0 +1,59 @@
+<div class="filter">
+  <h2>Filter</h2>
+  <form [formGroup]="filtersForm">
+    <div class="filter-breed">
+      <mat-checkbox formControlName="hasBreed">Has Breed</mat-checkbox>
+      <mat-form-field class="mat-input-container mat-form-field breed"
+        ><mat-label>By Breed</mat-label>
+        <mat-select
+          placeholder="Breeds"
+          formControlName="breeds"
+          multiple
+          [disabled]="!this.filtersForm.controls['hasBreed'].value"
+        >
+          <mat-option [value]="'all'">All</mat-option>
+          <mat-option
+            [disabled]="this.filtersForm.controls['breeds'].value[0] === 'all'"
+            *ngFor="let breed of breedList"
+            [value]="breed.id"
+            >{{ breed.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="mat-input-container mat-form-field quantity"
+      ><mat-label>By Request Quantity</mat-label>
+      <mat-select placeholder="Quantity" formControlName="quantity">
+        <mat-option *ngFor="let number of quantityCount" [value]="number">{{
+          number
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div class="gallery-div">
+  <div class="gallery">
+    <div *ngIf="showImages">
+      <app-cat-gallery [imagesPerPage]="imagesPerPage"></app-cat-gallery>
+      <mat-paginator
+        #paginator
+        [length]="imagesLength"
+        [pageSize]="pageSize"
+        [pageIndex]="page"
+        [pageSizeOptions]="[1, 5, 10, 20, 50]"
+        (page)="getDataForPagination($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="square-jelly-box"
+    [fullScreen]="true"
+  >
+    <p>Loading Images...</p>
+  </ngx-spinner>
+</div>

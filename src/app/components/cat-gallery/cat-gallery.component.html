@@ -1,0 +1,22 @@
+<div class="container images-field">
+  <ng-container *ngIf="imagesData$ | async as imageData">
+    <div class="gallery">
+      <ng-container *ngIf="!imageData.pending">
+        <ng-container *ngIf="imageData.images.length > 0">
+          <div *ngFor="let image of imagesPerPage" class="gallery-item">
+            <app-cat-gallery-item [image]="image"></app-cat-gallery-item>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="!imageData.pending && imageData.images.length === 0"
+        >
+          <div class="placeholder">
+            <i class="fas fa-images placeholder-icon"></i>
+            <h4>No images match filters!</h4>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

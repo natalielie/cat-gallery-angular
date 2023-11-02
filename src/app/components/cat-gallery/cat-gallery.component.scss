@@ -1,0 +1,34 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  gap: 20px;
+}
+
+.placeholder {
+  width: max-content;
+  margin: 100px 450px;
+}
+
+.placeholder-icon {
+  font-size: 3.5em;
+}
+
+.container.images-field {
+  margin-top: 50px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .placeholder {
+    margin: 100px 650px;
+  }
+}
