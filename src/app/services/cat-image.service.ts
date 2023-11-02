@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { IBreed, ICatImage } from '../interfaces/cat.interface';
 import { apiRequest } from '../shared/api.example';
-import { ImageFilter } from '../store/reducers/cat-gallery-images.reducers';
+import { ImageFilter } from '../interfaces/cat.interface';
 
 /**
  * A service for executing all api requests
@@ -33,22 +33,27 @@ export class CatImageService {
    *
    */
   getCatsFilteredImages(filter: ImageFilter): Observable<ICatImage[]> {
+    const params = new HttpParams().set('limit', filter.quantity);
     if (!filter.hasBreed) {
+      params.set('hasBreed', 0);
       return this.httpClient.get<ICatImage[]>(
-        `${apiRequest.apiUrl}images/search?has_breeds=0&limit=${filter.quantity}`
+        `${apiRequest.apiUrl}images/search?`,
+        { params }
       );
     }
     if (filter.breeds[0] === 'all') {
+      params.set('hasBreed', 1);
+      // return this.httpClient.get<ICatImage[]>(
+      //   `${apiRequest.apiUrl}images/search?has_breeds=1&limit=${filter.quantity}`
       return this.httpClient.get<ICatImage[]>(
-        `${apiRequest.apiUrl}images/search?has_breeds=1&limit=${filter.quantity}`
+        `${apiRequest.apiUrl}images/search?`,
+        { params }
       );
     } else {
+      params.set('breed_ids', filter.breeds.toString());
       return this.httpClient.get<ICatImage[]>(
-        `${
-          apiRequest.apiUrl
-        }images/search?breed_ids=${filter.breeds.toString()}&limit=${
-          filter.quantity
-        }`
+        `${apiRequest.apiUrl}images/search?`,
+        { params }
       );
     }
   }

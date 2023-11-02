@@ -1,19 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as CatGalleryActions from '../actions/cat-gallery.actions';
-import { ICatImage } from 'src/app/interfaces/cat.interface';
-
-export interface CatImageData {
-  pending: boolean;
-  images: ICatImage[];
-  imageFilters: ImageFilter;
-}
-
-export interface ImageFilter {
-  breeds: string[];
-  quantity: number;
-  hasBreed: boolean;
-}
+import { CatImageData, ICatImage } from 'src/app/interfaces/cat.interface';
 
 export interface CatGalleryState {
   imageData: CatImageData;
@@ -21,6 +9,7 @@ export interface CatGalleryState {
 
 const initialState: CatImageData = {
   pending: false,
+  error: null,
   images: [],
   imageFilters: {
     breeds: ['all'],
@@ -51,6 +40,15 @@ export const imageReducers = createReducer(
     return {
       ...state,
       pending: false,
+      error: null,
+      images: imageResponse,
+    };
+  }),
+  on(CatGalleryActions.imagesLoadedError, (state, { imageResponse }) => {
+    return {
+      ...state,
+      pending: false,
+      error: 'error',
       images: imageResponse,
     };
   })

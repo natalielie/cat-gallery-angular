@@ -1,18 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
-import { IBreed, ICatImage } from 'src/app/interfaces/cat.interface';
-import * as CatGalleryActions from '../../store/actions/cat-gallery.actions';
 import {
+  IBreed,
+  ICatImage,
   ImageFilter,
-  CatGalleryState,
-} from 'src/app/store/reducers/cat-gallery-images.reducers';
+} from 'src/app/interfaces/cat.interface';
+import * as CatGalleryActions from '../../store/actions/cat-gallery.actions';
+import { CatGalleryState } from 'src/app/store/reducers/cat-gallery-images.reducers';
 import { selectImageData } from 'src/app/store/selectors/cat-gallery.selectors';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatPaginator } from '@angular/material/paginator';
+import { defaultCount, quantityCount } from 'src/app/constants/constants';
 
 /**
  * A component for displaying and processing the filtering
@@ -24,30 +26,27 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CatGalleryFilterComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  /** options of numbers of images to display at once */
-  readonly quantityCount = [1, 5, 10, 20, 50, 100];
-  /** list of all breeds in the db */
+
   breedList!: IBreed[];
-  /** form with default optins chosen */
+
   readonly filtersForm: FormGroup = this.formBuilder.group({
-    breeds: { value: ['all'], disabled: false },
-    quantity: this.formBuilder.control(10),
-    hasBreed: true,
+    breeds: new FormControl<string[]>({ value: ['all'], disabled: false }),
+    quantity: new FormControl<number>(10),
+    hasBreed: new FormControl<boolean>(true),
   });
-  /** a subject for preventing memory leak */
+
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  /** image data from the store */
   readonly imagesData$ = this.store.select(selectImageData);
   imagesLength!: number;
   page = 0;
   pageSize = 10;
   imagesPerPage!: ICatImage[];
   allImages!: ICatImage[];
-  /** a spinner for loading */
+
   showImages = false;
-  /** The number of images to load at first */
-  readonly defaultCount = 10;
+
+  $destroy: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private store: Store<CatGalleryState>,
@@ -59,34 +58,32 @@ export class CatGalleryFilterComponent implements OnInit, OnDestroy {
     this.breedList = this.route.snapshot.data['breeds'];
   }
 
-  /**
-   * Dispatching changing the filter values
-   */
   ngOnInit(): void {
     // first load
     this.store.dispatch(
       CatGalleryActions.getImages({
-        quantity: this.defaultCount,
+        quantity: defaultCount,
       })
     );
 
     //subscribing to filter changes
-    this.filtersForm.valueChanges.subscribe(() => {
-      const filterFormValue = this.filtersForm.getRawValue();
-      if (filterFormValue.hasBreed && filterFormValue.breeds.length === 0) {
-        filterFormValue.breeds = ['none'];
-      }
-      const filter = {
-        ...filterFormValue,
-        breeds: filterFormValue.breeds ?? [],
-      };
-      this.store.dispatch(CatGalleryActions.changeFilter({ filter }));
+    this.filtersForm.valueChanges
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((filterFormValue) => {
+        if (filterFormValue.hasBreed && filterFormValue.breeds.length === 0) {
+          filterFormValue.breeds = ['none'];
+        }
+        const filter = {
+          ...filterFormValue,
+          breeds: filterFormValue.breeds ?? [],
+        };
+        this.store.dispatch(CatGalleryActions.changeFilter({ filter }));
 
-      this.loadFilteredImages(filter);
-    });
+        this.loadFilteredImages(filter);
+      });
 
     // subscriving to set of images changes
-    !this.imagesData$.subscribe((value) => {
+    !this.imagesData$.pipe(takeUntil(this.$destroy)).subscribe((value) => {
       if (value.pending) {
         this.spinner.show();
         this.showImages = false;
@@ -104,19 +101,15 @@ export class CatGalleryFilterComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * preventing memory leak
-   */
   ngOnDestroy(): void {
-    this.unsubscribe.next();
+    this.$destroy.next(true);
+    this.$destroy.complete();
   }
 
-  /**
-   * Dispatching loading images after changing the filter values
-   *
-   * @param filter FilterImage (breeds and quantity) for filtering
-   *
-   */
+  get quantityCount(): number[] {
+    return quantityCount;
+  }
+
   loadFilteredImages(filter: ImageFilter): void {
     this.store.dispatch(
       CatGalleryActions.getFilteredImages({

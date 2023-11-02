@@ -1,9 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import {
-  CatGalleryState,
-  CatImageData,
-} from '../reducers/cat-gallery-images.reducers';
+import { CatGalleryState } from '../reducers/cat-gallery-images.reducers';
+import { CatImageData } from 'src/app/interfaces/cat.interface';
 
 export const selectImageData = createSelector(
   (state: CatGalleryState) => {
