@@ -32,18 +32,20 @@
     </mat-form-field>
   </form>
 </div>
-<div class="gallery">
-  <div *ngIf="showImages">
-    <app-cat-gallery [imagesPerPage]="imagesPerPage"></app-cat-gallery>
-    <mat-paginator
-      #paginator
-      [length]="imagesLength"
-      [pageSize]="pageSize"
-      [pageIndex]="page"
-      [pageSizeOptions]="[1, 5, 10, 20, 50]"
-      (page)="getDataForPagination($event)"
-    >
-    </mat-paginator>
+<div class="gallery-div">
+  <div class="gallery">
+    <div *ngIf="showImages">
+      <app-cat-gallery [imagesPerPage]="imagesPerPage"></app-cat-gallery>
+      <mat-paginator
+        #paginator
+        [length]="imagesLength"
+        [pageSize]="pageSize"
+        [pageIndex]="page"
+        [pageSizeOptions]="[1, 5, 10, 20, 50]"
+        (page)="getDataForPagination($event)"
+      >
+      </mat-paginator>
+    </div>
   </div>
   <ngx-spinner
     bdColor="rgba(0, 0, 0, 0.8)"

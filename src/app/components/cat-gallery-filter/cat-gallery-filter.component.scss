@@ -3,8 +3,13 @@
 }
 
 .gallery {
-  margin-left: 25%;
+  margin-left: 5%;
+  margin-top: -20%;
   width: min-content;
+}
+
+.gallery-div {
+  float: right;
 }
 
 .filter {
@@ -30,20 +35,18 @@ p {
 }
 
 mat-paginator {
-  margin-left: 25%;
   margin-top: 30px;
-  position: absolute;
+  position: sticky;
 }
 
 @media only screen and (min-width: 1920px) {
   .gallery {
-    margin-left: 15%;
+    margin-left: 3%;
     width: min-content;
   }
 
   mat-paginator {
-    margin-left: 33%;
     margin-top: 30px;
-    position: absolute;
+    position: sticky;
   }
 }

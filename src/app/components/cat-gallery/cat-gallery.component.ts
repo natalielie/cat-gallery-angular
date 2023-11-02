@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { selectImageData } from 'src/app/store/selectors/cat-gallery.selectors';
 import { CatGalleryState } from 'src/app/store/reducers/cat-gallery-images.reducers';
-import { Subject, merge, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ICatImage } from 'src/app/interfaces/cat.interface';
 
 /**

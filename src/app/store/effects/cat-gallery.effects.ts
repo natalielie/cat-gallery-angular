@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { EMPTY, empty } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as CatGalleryActions from '../actions/cat-gallery.actions';
 import { CatImageService } from 'src/app/services/cat-image.service';
-import { CatGalleryState } from '../reducers/cat-gallery-images.reducers';
 
 @Injectable()
 export class CatGalleryEffects {
   constructor(
-    private store: Store<CatGalleryState>,
     private actions$: Actions,
     private catImageService: CatImageService
   ) {}
